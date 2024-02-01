@@ -42,8 +42,6 @@ def main():
         top_10_recommended_job_excluded = top_10_recommended_job.drop(
             'Job Description', axis=1)
 
-        top_10_recommended_job_excluded = top_10_recommended_job_excluded.iloc[:, 1:]
-
         create_table(top_10_recommended_job_excluded)
 
 
