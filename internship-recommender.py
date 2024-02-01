@@ -22,14 +22,14 @@ def main():
     nltk.download('wordnet')
     nltk.download('stopwords')
 
-    st.title("Hi! I am Chuong Tran")
+    create_introduction()
+
     uploaded_file = st.file_uploader("Choose your .pdf file", type="pdf")
 
     if (uploaded_file is not None):
         resume = read_pdf(uploaded_file)
 
         job_data = return_data_list("./data/data_without_newline.csv")
-        resume = read_pdf("ChuongTran_Resume.pdf")
         resume_text = remove_stop_words(resume)
         resume_text = lemmatize_text(resume_text)
 
@@ -41,6 +41,8 @@ def main():
 
         top_10_recommended_job_excluded = top_10_recommended_job.drop(
             'Job Description', axis=1)
+
+        top_10_recommended_job_excluded = top_10_recommended_job_excluded.iloc[:, 1:]
 
         create_table(top_10_recommended_job_excluded)
 
@@ -63,6 +65,15 @@ def return_data_list(csv_file):
 
 def create_table(data):
     st.table(data)
+
+
+def create_introduction():
+    url = "https://github.com/chuongtran01/internship-recommender"
+    st.title("Hi! I am Chuong Tran")
+    st.subheader("Internship Recommender Based on Resumes")
+    st.markdown("[Github repository](%s)" % url)
+
+    st.write("This recommendation system leverages Natural Language Processing techniques, including TF-IDF and Cosine Similarity, to match internship opportunities with user resume")
 
 
 def read_pdf(pdf_file):
