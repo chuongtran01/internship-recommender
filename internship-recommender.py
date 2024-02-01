@@ -76,8 +76,13 @@ def create_introduction():
 
 def read_pdf(pdf_file):
     reader = PdfReader(pdf_file)
-    page_one = reader.pages[0]
-    resume = page_one.extract_text()
+    pages = reader.pages
+
+    resume = ''
+
+    for page in pages:
+        resume += page.extract_text()
+
     return resume
 
 
