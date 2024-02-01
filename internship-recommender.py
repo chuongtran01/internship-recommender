@@ -42,21 +42,6 @@ def main():
         top_10_recommended_job_excluded = top_10_recommended_job.drop(
             'Job Description', axis=1)
 
-        output_table = pd.DataFrame([
-            {
-                "Role": top_10_recommended_job_excluded['Role']
-            },
-            {
-                "Company": top_10_recommended_job_excluded['Company']
-            },
-            {
-                "Location": top_10_recommended_job_excluded['Location']
-            },
-            {
-                "Apply link": top_10_recommended_job_excluded['Apply link']
-            },
-        ])
-
         create_table(output_table)
 
 
