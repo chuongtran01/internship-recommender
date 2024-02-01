@@ -10,6 +10,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import re
 import streamlit as st
+import joblib
 
 ADJ, ADJ_SAT, ADV, NOUN, VERB = 'a', 's', 'r', 'n', 'v'
 
@@ -45,10 +46,17 @@ def main():
         create_table(top_10_recommended_job_excluded)
 
 
+def tfidf_vectorize_data(job_df):
+    tfidf_vectorizer = TfidfVectorizer(stop_words='english')
+    tfidf_matrix = tfidf_vectorizer.fit_transform(job_df['Job Description'])
+    joblib.dump(tfidf_matrix, 'tfidf_matrix.pkl')
+
+
 def return_top_recommended_jobs(n, resume_text, job_df):
     tfidf_vectorizer = TfidfVectorizer(stop_words='english')
 
-    tfidf_matrix = tfidf_vectorizer.fit_transform(job_df['Job Description'])
+    # tfidf_matrix = tfidf_vectorizer.fit_transform(job_df['Job Description'])
+    tfidf_matrix = joblib.load('tfidf_matrix.pkl')
 
     recommended_job = recommend_job(
         resume_text, tfidf_matrix, tfidf_vectorizer, job_df)
