@@ -42,7 +42,7 @@ def main():
         top_10_recommended_job_excluded = top_10_recommended_job.drop(
             'Job Description', axis=1)
 
-        create_table(output_table)
+        create_table(top_10_recommended_job_excluded)
 
 
 def return_top_recommended_jobs(n, resume_text, job_df):
