@@ -67,8 +67,8 @@ def create_table(data):
 
 def create_introduction():
     url = "https://github.com/chuongtran01/internship-recommender"
-    st.title("Hi! I am Chuong Tran")
-    st.subheader("Internship Recommender Based on Resumes")
+    st.title("Internship Recommender Based on Resumes")
+    st.subheader("Author: Chuong Tran")
     st.markdown("[Github repository](%s)" % url)
 
     st.write("This recommendation system leverages Natural Language Processing techniques, including TF-IDF and Cosine Similarity, to match internship opportunities with user resume")
