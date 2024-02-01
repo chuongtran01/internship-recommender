@@ -71,7 +71,7 @@ def create_introduction():
     st.subheader("Author: Chuong Tran")
     st.markdown("[Github repository](%s)" % url)
 
-    st.write("This recommendation system leverages Natural Language Processing techniques, including TF-IDF and Cosine Similarity, to match internship opportunities with user resume")
+    st.write("This recommendation system leverages Natural Language Processing techniques, including TF-IDF and Cosine Similarity, to match internship opportunities with user resume.")
 
 
 def read_pdf(pdf_file):
