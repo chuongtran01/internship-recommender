@@ -40,26 +40,19 @@ def main():
         top_10_recommended_job = return_top_recommended_jobs(
             10, resume_df, job_df)
 
-        top_10_recommended_job_excluded = top_10_recommended_job.drop(
-            'Job Description', axis=1)
-
-        create_table(top_10_recommended_job_excluded)
-
-
-def tfidf_vectorize_data(job_df):
-    tfidf_vectorizer = TfidfVectorizer(stop_words='english')
-    tfidf_matrix = tfidf_vectorizer.fit_transform(job_df['Job Description'])
-    joblib.dump(tfidf_matrix, 'tfidf_matrix.pkl')
+        create_table(top_10_recommended_job)
 
 
 def return_top_recommended_jobs(n, resume_text, job_df):
     tfidf_vectorizer = TfidfVectorizer(stop_words='english')
 
     tfidf_matrix = tfidf_vectorizer.fit_transform(job_df['Job Description'])
-    # tfidf_matrix = joblib.load('tfidf_matrix.pkl')
 
     recommended_job = recommend_job(
         resume_text, tfidf_matrix, tfidf_vectorizer, job_df)
+
+    recommended_job = recommended_job.drop(
+        'Job Description', axis=1)
 
     return recommended_job[:n]
 
